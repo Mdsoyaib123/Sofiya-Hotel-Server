@@ -38,10 +38,11 @@ async function run() {
       const result= await roomsCollection.find().toArray()
       res.send(result)
     })
-    app.get('/api/v1/rooms/:id',(req,res)=>{
+    app.get('/api/v1/rooms/:id',async(req,res)=>{
       const id = req.params.id 
       const query = {_id:new ObjectId(id)}
-      
+      const result = await roomsCollection.findOne(query);
+      res.send(result)
     })
 
 
