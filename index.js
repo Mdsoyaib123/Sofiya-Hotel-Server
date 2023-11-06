@@ -34,6 +34,8 @@ async function run() {
 
     const roomsCollection = client.db('hotelDB').collection('rooms')
 
+    const bookingCollection = client.db('hotelDB').collection('myBooking')
+
     app.get('/api/v1/rooms',async(req,res)=>{
       const result= await roomsCollection.find().toArray()
       res.send(result)
@@ -43,6 +45,18 @@ async function run() {
       const query = {_id:new ObjectId(id)}
       const result = await roomsCollection.findOne(query);
       res.send(result)
+    })
+    app.get('/api/v1/bookingData',async(req,res)=>{
+      const result = await bookingCollection.find().toArray();
+      res.send(result)
+    })
+
+
+    app.post('/api/v1/bookingData',async(req,res)=>{
+        const data = req.body 
+        console.log(data);
+        const result = await bookingCollection.insertOne(data)
+        res.send(result)
     })
 
 
