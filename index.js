@@ -51,13 +51,39 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/api/v1/bookingData/:id',async(req,res)=>{
+      const id = req.params.id 
+      const query = {_id:new ObjectId(id)}
+      const result = await bookingCollection.findOne(query)
+      res.send(result)
+    })
+   
+
+
 
     app.post('/api/v1/bookingData',async(req,res)=>{
         const data = req.body 
-        console.log(data);
+        // console.log(data);
         const result = await bookingCollection.insertOne(data)
         res.send(result)
     })
+
+    // app.put('/api/v1/bookingData/:id',async(req,res)=>{
+    //   const date  = req.body 
+    //   // console.log(date.updateDate);
+    //   const id = req.params.id ;
+    //   // console.log(id);
+    //   const filter = {_id:new ObjectId(id)};
+    //   const options = { upsert: true };
+    //   const updateDoc = {
+    //     $set: {
+    //      date:date.updateDate
+    //     },
+    //   };
+    //   const result = await bookingCollection.updateOne(filter,options,updateDoc)
+    //   res.send(result)
+
+    // })
 
 
     // Send a ping to confirm a successful connection
