@@ -12,7 +12,12 @@ const  cookieParser = require('cookie-parser')
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-  origin:['http://localhost:5173'],
+  origin:[
+    'http://localhost:5173',
+
+    'https://the-hotel-room.web.app',
+    'https://the-hotel-room.firebaseapp.com'
+  ],
   credentials:true 
 }));
 
@@ -106,9 +111,6 @@ async function run() {
       if(req.query.email !== req.user.email){
         return res.status(403).send({message:'unAuthorized access'})
       }
-     
-      
-    
       if(req.query?.email){
         const email= req.query.email
         query={email: email}
@@ -161,23 +163,6 @@ async function run() {
       const query = {_id:new ObjectId(id)}
       const result = await bookingCollection.deleteOne(query)
       res.send(result)
-
-
-    //   const currentDate = req.body 
-    // //   console.log(currentDate);
-    //   const date = await bookingCollection.findOne(query)
-    //   const BookingDate  = '2023-12-07 18:32:45'
-    //   console.log(BookingDate);
-    //   const oneDayInMillis = 24 * 60 * 60 * 1000;
-    //   const bookingTimestamp = BookingDate.valueOf();
-    //   // console.log(bookingTimestamp);
-    //   const cancellationTimestamp = currentDate.valueOf();
-    //   // console.log(cancellationTimestamp);
-    //   if (bookingTimestamp - cancellationTimestamp >= oneDayInMillis) {
-    //     console.log('Booking can not be cancel');
-    //   } else {
-    //     console.log('You can cancel the booking.'); 
-    //   }
     })
 
 
