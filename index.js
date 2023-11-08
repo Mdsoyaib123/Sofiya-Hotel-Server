@@ -53,7 +53,7 @@ const verifyToken = (req,res,next)=>{
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+   
 
     const roomsCollection = client.db('hotelDB').collection('rooms')
 
@@ -63,12 +63,14 @@ async function run() {
     app.post('/jwt',async(req,res)=>{
       const user = req.body 
       const token = jwt.sign(user , process.env.ACCESS_TOKEN_SECRET,{expiresIn:'2h'})
-      res.cookie('token',token,{
-        httpOnly:true,
-        secure:true,
-        sameSite:'none' 
-      })
-      res.send({status:true})
+
+      res
+        .cookie('token', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        })
+        .send({ success: true })
       
      })
 
