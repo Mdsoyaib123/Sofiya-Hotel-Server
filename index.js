@@ -143,11 +143,34 @@ async function run() {
         res.send(result)
     })
 
+
+    // // update book now
+    app.patch('/api/v1/bookingData/update',async(req,res)=>{
+      const SeatData = req.body
+      console.log(SeatData);
+      const id = req.query.id 
+      console.log(id);
+      const query = {_id: new ObjectId(id)};
+
+      const updateDoc = {
+        $set: {
+          available_seat: SeatData.SeatData
+        },
+      };
+      const result = await roomsCollection.updateOne(query,updateDoc)
+      res.send(result)
+    })
+
+
+
+
+
+
     app.put('/api/v1/bookingData/:id',async(req,res)=>{
       const date  = req.body 
-      console.log(date.updateDate);
+      // console.log(date.updateDate);
       const id = req.params.id ;
-      console.log(id);
+      // console.log(id);
       const filter = {_id:new ObjectId(id)};
       // const options = { upsert: true };
       const updateDoc = {
