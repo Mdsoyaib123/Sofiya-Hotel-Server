@@ -5,6 +5,7 @@ import cors from 'cors';
 import { UserRoutes } from './src/app/modules/User/user.route.js';
 import { authRouter } from './src/app/modules/Authentication/Auth.routes.js';
 import { roomRoute } from './src/app/modules/Rooms/room.route.js';
+import { bookingRoutes } from './src/app/modules/booking/booking.route.js';
 
 
 
@@ -24,6 +25,7 @@ app.use(cors(corsOptions));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1/rooms', roomRoute);
+app.use('/api/v1/bookingData', bookingRoutes);
 
 // app.use('/', authRoutes2)
 
