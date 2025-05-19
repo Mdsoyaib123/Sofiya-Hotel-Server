@@ -13,9 +13,8 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
     date: {
-      type: String,
-      required: true,
-      default: () => new Date().toISOString().split("T")[0],
+      startDate: { type: String, required: true },
+      endDate: { type: String, required: true },
     },
     status: {
       type: String,
