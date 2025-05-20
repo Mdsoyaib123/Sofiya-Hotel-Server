@@ -5,8 +5,9 @@ const router = express.Router();
 
 router.post("/create-booking", bookingController.createBooking);
 router.get("/", bookingController.getAllBookings);
+router.get("/:id", bookingController.getSingleBooking);
 router.put("/:id", bookingController.updateBookingDate);
 router.delete("/:id", bookingController.deleteBooking);
-router.get("/my", bookingController.getMyBookings);
+router.get("/my/:email", bookingController.getMyBookings);
 
 export const bookingRoutes = router;

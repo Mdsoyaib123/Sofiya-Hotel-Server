@@ -28,15 +28,29 @@ const getAllBookings = async (req, res) => {
     res.status(500).send({ message: "Failed to fetch bookings", error });
   }
 };
+const getSingleBooking = async (req, res) => {
+  const id = req.params.id
+  try {
+    const result = await bookingService.getSingleBooking(id);
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "single bookings retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch bookings", error });
+  }
+};
 
 const updateBookingDate = async (req, res) => {
   const id = req.params.id;
-  const {date} = req.body;
 
+  const updatedDate = req.body;
   try {
     const result = await bookingService.updateBookingDateService(
       id,
-      date
+      updatedDate
     );
     sendResponse(res, {
       statusCode: 200,
@@ -69,8 +83,10 @@ const getMyBookings = async (req, res) => {
   // if (req.query.email !== req.user.email) {
   //   return res.status(403).send({ message: "Unauthorized access" });
   // }
+
   try {
-    const result = await bookingService.getMyBookingsService(req.query.email);
+    const result = await bookingService.getMyBookingsService(req.params.email);
+
     sendResponse(res, {
       statusCode: 200,
       success: true,
@@ -85,6 +101,7 @@ const getMyBookings = async (req, res) => {
 export const bookingController = {
   createBooking,
   getAllBookings,
+  getSingleBooking,
   updateBookingDate,
   deleteBooking,
   getMyBookings,

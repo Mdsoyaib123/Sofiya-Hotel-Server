@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Booking } from "./booking.model.js";
-import { User } from './../User/user.model.js';
+import { User } from "./../User/user.model.js";
 
 const createBookingService = async (bookingData) => {
   return await Booking.insertOne(bookingData);
@@ -8,6 +8,11 @@ const createBookingService = async (bookingData) => {
 
 const getAllBookingsService = async () => {
   return await Booking.find().populate("userId").populate("roomId");
+};
+const getSingleBooking = async (id) => {
+  return await Booking.findOne({ _id: new ObjectId(id) })
+    .populate("userId")
+    .populate("roomId");
 };
 
 const updateBookingDateService = async (id, date) => {
@@ -22,9 +27,7 @@ const deleteBookingService = async (id) => {
 };
 
 const getMyBookingsService = async (email) => {
-  console.log(email);
   const user = await User.findOne({ email });
-  console.log("user is exit", user);
   if (!user) {
     throw new Error("User not found");
   }
@@ -37,7 +40,7 @@ const getMyBookingsService = async (email) => {
 export const bookingService = {
   createBookingService,
   getAllBookingsService,
-
+  getSingleBooking,
   updateBookingDateService,
   deleteBookingService,
   getMyBookingsService,
