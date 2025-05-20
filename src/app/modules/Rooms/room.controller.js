@@ -23,7 +23,6 @@ export const getAllRooms = async (req, res) => {
 
 export const getRoomById = async (req, res) => {
   const id = req.params.id;
-  console.log('controller',id)
   const result = await RoomService.getRoomByIdFromDB(id);
   sendResponse(res, {
     statusCode: 200,
