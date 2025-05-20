@@ -3,7 +3,8 @@ import { z } from "zod";
 const reviewSchema = z.object({
   rating: z.number().min(0).max(5),
   comment: z.string(),
-  userName: z.string()
+  userName: z.string(),
+  date:z.string()
 });
 
  const roomValidationSchema = z.object({

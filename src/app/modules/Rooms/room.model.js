@@ -5,6 +5,7 @@ const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
   userName: { type: String, required: true },
+  date:{type:String,required:true}
 });
 
 const roomSchema = new mongoose.Schema(

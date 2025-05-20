@@ -15,7 +15,12 @@ const getAllRoomsFromDB = async () => {
 };
 
 const getRoomByIdFromDB = async (id) => {
-  return await Room.findOne({ _id: new ObjectId(id) });
+  if (!ObjectId.isValid(id)) {
+    throw new Error('Invalid Room ID');
+  }
+
+  const res = await Room.findOne({ _id: new ObjectId(id) });
+  return res;
 };
 
 const updateRoomReviewInDB = async (roomName, reviewData) => {

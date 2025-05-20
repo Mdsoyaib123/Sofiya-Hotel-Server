@@ -12,7 +12,7 @@ router.post(
 );
 router.get("/", roomController.getAllRooms);
 router.get("/:id", roomController.getRoomById);
-router.put("/", roomController.updateRoomReview);
+router.put("/update-review", roomController.updateRoomReview);
 router.patch("/update-seats/:id", roomController.updateRoomSeats);
 
 export const roomRoute = router;
