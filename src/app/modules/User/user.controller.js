@@ -1,7 +1,6 @@
 
 import catchAsync from '../../Utils/catchAsync.js';
-
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import sendResponse from './../../Utils/sendResponse.js';
 import { UserServices } from './user.service.js';
 
