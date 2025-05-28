@@ -23,11 +23,19 @@ const getRoomByIdFromDB = async (id) => {
   return res;
 };
 
-const updateRoomReviewInDB = async (roomName, reviewData) => {
+const updateRoomReviewInDB = async (roomName, reviewDataArray) => {
   const query = { room_name: roomName };
-  const updateDoc = { $set: { review: reviewData } };
+  const updateDoc = {
+    $push: {
+      review: {
+        $each: reviewDataArray,
+      },
+    },
+  };
+console.log(updateDoc)
   return await Room.updateOne(query, updateDoc);
 };
+
 
 const updateRoomSeatsInDB = async (id, seatData) => {
   const updateDoc = { $set: { available_seat: seatData } };
