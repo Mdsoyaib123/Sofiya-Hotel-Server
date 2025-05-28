@@ -16,19 +16,11 @@ async function connectDB() {
   }
 }
 
-// Vercel handler
-export default async function handler(req, res) {
-  await connectDB();
-  return App(req, res);
-}
+const PORT = process.env.PORT || 3000;
 
-// Local server logic (only runs when file is executed directly)
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 10000;
-  connectDB().then(() => {
-    App.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
+// Always run server in Render and local dev
+connectDB().then(() => {
+  App.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
   });
-}
-
+});
