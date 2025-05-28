@@ -15,7 +15,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
       "http://localhost:5173", // dev
-      "https://your-vercel-domain.vercel.app", // production frontend
+      "https://assainment-11.vercel.app", // production frontend
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
